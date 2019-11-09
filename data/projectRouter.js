@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const bodyInfo = req.body;
   if (!bodyInfo.name || !bodyInfo.description) {
-    res.status(404).json({ message: 'Must have a name and description.' })
+    res.status(400).json({ message: 'Must have a name and description.' })
   } else {
     db.insert(bodyInfo)
       .then(info => {
