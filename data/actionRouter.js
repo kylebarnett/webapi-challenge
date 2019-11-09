@@ -43,4 +43,19 @@ router.put('/:id', (req, res) => {
     })
 })
 
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  db.remove(id)
+    .then(info => {
+      if (info) {
+        res.status(204).json({ message: `${id} successfully removed.` })
+      } else {
+        res.status(404).json({ message: `${id} not found.` })
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error deleting id.' })
+    })
+})
+
 module.exports = router;
