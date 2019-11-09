@@ -27,4 +27,20 @@ router.post('/', (req, res) => {
   }
 })
 
+router.put('/:id', (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+  db.update(id, body)
+    .then(results => {
+      if (results) {
+        res.status(200).json(results)
+      } else {
+        res.status(404).json({ message: 'Action not found to update.' })
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error updating action.' })
+    })
+})
+
 module.exports = router;
